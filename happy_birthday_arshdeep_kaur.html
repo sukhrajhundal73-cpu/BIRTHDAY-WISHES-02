@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Arshdeep Kaur | A Message In The Stars</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      background-color: #07090e;
+      color: #f1f5f9;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    .font-editorial { font-family: 'Fraunces', Georgia, serif; }
+    a { color: inherit; text-decoration: none; }
+    
+    .glass-panel {
+      background: rgba(18, 22, 34, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-panel-warm {
+      background: rgba(28, 22, 26, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(251, 191, 36, 0.15);
+    }
+
+    @keyframes flame-flicker {
+      0%, 100% { transform: scale(1) rotate(-1deg); filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.8)); }
+      25% { transform: scale(1.06, 0.96) rotate(1.5deg); filter: drop-shadow(0 0 14px rgba(251, 191, 36, 0.9)); }
+      50% { transform: scale(0.96, 1.04) rotate(-0.5deg); filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.75)); }
+      75% { transform: scale(1.03, 0.98) rotate(1deg); filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.85)); }
+    }
+
+    @keyframes smoke-rise {
+      0% { opacity: 0.8; transform: translateY(0) scale(0.6); }
+      100% { opacity: 0; transform: translateY(-35px) scale(1.8) rotate(12deg); }
+    }
+
+    .animate-flame { animation: flame-flicker 1.8s infinite ease-in-out; transform-origin: bottom center; }
+    .animate-smoke { animation: smoke-rise 1.5s forwards ease-out; }
+
+    .polaroid-card {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      transform-style: preserve-3d;
+    }
+    .polaroid-card:hover {
+      transform: scale(1.03) rotate(0deg) !important;
+      z-index: 20;
+    }
+    .card-inner {
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-style: preserve-3d;
+    }
+    .card-flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+    .card-front, .card-back {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .card-back {
+      transform: rotateY(180deg);
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: stretch; }
+    @media(min-width: 900px) {
+      .grid-2 { grid-template-columns: 1.2fr 0.8fr; }
+    }
+
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+
+    /* Button styles */
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #fde68a, #f59e0b);
+      color: #0f172a;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+      transition: all 0.2s ease;
+    }
+    .btn-gold:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.45);
+    }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #e2e8f0;
+      font-weight: 500;
+      font-size: 14px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="starfield" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:0;"></canvas>
+
+  <!-- Top Navigation (3-Zone Contract) -->
+  <header style="position:sticky;top:0;z-index:50;width:100%;border-bottom:1px solid rgba(255,255,255,0.06);" class="glass-panel">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:32px;padding-top:16px;padding-bottom:16px;">
+      <a href="#sky" class="font-editorial" style="font-size:20px;color:#fde68a;font-weight:500;letter-spacing:0.02em;">Celeste</a>
+      <nav style="display:flex;align-items:center;gap:24px;font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:0.05em;color:#94a3b8;">
+        <a href="#sky" style="transition:color 0.2s;">The Sky</a>
+        <a href="#memories" style="transition:color 0.2s;">Memories</a>
+        <a href="#reasons" style="transition:color 0.2s;">Adorations</a>
+        <a href="#ritual" style="transition:color 0.2s;">The Ritual</a>
+        <a href="#letter" style="transition:color 0.2s;">Letter</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button id="musicToggleBtn" class="btn-ghost" style="padding:8px 14px;font-size:12px;">
+          <span id="musicStatusText">♫ Play Melody</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="sky" style="position:relative;padding:60px 0 80px 0;">
+    <div class="container">
+      <div class="grid-2">
+        <div style="display:flex;flex-direction:column;justify-content:center;gap:20px;">
+          <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:#fde68a;font-weight:600;">
+            A Celestial Dedication · 30 Oct · Today
+          </div>
+          <h1 class="font-editorial" style="font-size: clamp(38px, 5vw, 64px);line-height:1.15;font-weight:300;color:#ffffff;text-wrap:balance;">
+            Happy Birthday, <span style="font-style:italic;color:#fde68a;border-bottom:2px solid rgba(253,230,138,0.4);">Arshdeep Kaur</span>
+          </h1>
+          <p style="font-size:17px;color:#cbd5e1;font-weight:300;max-width:540px;line-height:1.7;">
+            The universe is billions of years old, yet somehow I had the unbelievable luck of sharing this exact lifetime with you. Dedicated to my favorite person in all of existence.
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:14px;padding-top:10px;">
+            <a href="#memories" class="btn-gold">Step Inside Your Story</a>
+            <a href="#ritual" class="btn-ghost">Make A Birthday Wish</a>
+          </div>
+          <div style="font-size:12px;color:#64748b;padding-top:12px;">
+            Interactive Constellation Sky · Move cursor across the screen to connect starlight
+          </div>
+        </div>
+
+        <div class="glass-panel" style="position:relative;border-radius:18px;overflow:hidden;min-height:360px;border:1px solid rgba(255,255,255,0.12);">
+          <div style="width:100%;height:100%;min-height:360px;background:radial-gradient(circle at 50% 40%, #1e1b4b 0%, #090a12 100%);display:flex;align-items:center;justify-content:center;position:relative;">
+            <div style="position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(251,191,36,0.15);filter:blur(50px);"></div>
+            <div style="text-align:center;padding:30px;z-index:2;">
+              <div class="font-editorial" style="font-size:48px;color:#fef08a;margin-bottom:8px;">★</div>
+              <p class="font-editorial" style="font-size:22px;color:#fde68a;font-style:italic;">
+                "You are proof that the world holds poetry."
+              </p>
+              <p style="font-size:12px;color:#94a3b8;margin-top:8px;">
+                For Arshu
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Milestone Strip -->
+      <div style="margin-top:60px;padding-top:30px;border-top:1px solid rgba(255,255,255,0.06);" class="grid-4">
+        <div class="glass-panel" style="padding:16px;border-radius:12px;text-align:center;">
+          <div class="font-editorial" style="font-size:28px;color:#fde68a;">1</div>
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:#94a3b8;margin-top:4px;">In Eight Billion</div>
+        </div>
+        <div class="glass-panel" style="padding:16px;border-radius:12px;text-align:center;">
+          <div class="font-editorial" style="font-size:28px;color:#fde68a;">365</div>
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:#94a3b8;margin-top:4px;">Days of Starlight</div>
+        </div>
+        <div class="glass-panel" style="padding:16px;border-radius:12px;text-align:center;">
+          <div class="font-editorial" style="font-size:28px;color:#fde68a;">∞</div>
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:#94a3b8;margin-top:4px;">Shared Laughter</div>
+        </div>
+        <div class="glass-panel" style="padding:16px;border-radius:12px;text-align:center;">
+          <div class="font-editorial" style="font-size:28px;color:#fde68a;">100%</div>
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:#94a3b8;margin-top:4px;">Cherished Always</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Memories Section -->
+  <section id="memories" style="padding:80px 0;border-top:1px solid rgba(255,255,255,0.06);">
+    <div class="container">
+      <div style="margin-bottom:40px;">
+        <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:#fde68a;font-weight:600;margin-bottom:8px;">
+          Chapter 01 · Kept In Time
+        </div>
+        <h2 class="font-editorial" style="font-size: clamp(28px, 4vw, 42px);font-weight:300;color:#ffffff;">
+          Moments Frozen In Starlight
+        </h2>
+        <p style="font-size:14px;color:#94a3b8;margin-top:6px;max-width:540px;">
+          Click any polaroid to flip and reveal secret handwritten notes written on the back.
+        </p>
+      </div>
+
+      <div class="grid-4" id="memoriesContainer">
+        
+        <div class="polaroid-card" style="transform:rotate(1.2419582993367686deg);" onclick="flipCard(this)">
+          <div class="card-inner" style="position:relative;background:#fcfaf7;color:#1e293b;padding:16px 16px 24px 16px;border-radius:8px;box-shadow:0 18px 30px rgba(0,0,0,0.5);">
+            <div class="card-front">
+              <div style="width:100%;aspect-ratio:1/1;background:#1e1b4b;border-radius:4px;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;">
+                <div style="font-size:32px;color:#fef08a;">✦</div>
+              </div>
+              <div style="padding-top:12px;text-align:center;">
+                <h3 class="font-editorial" style="font-size:16px;color:#0f172a;font-weight:600;">POWER BANK</h3>
+                <p style="font-size:11px;color:#64748b;margin-top:2px;">28 SEPT 2026 </p>
+              </div>
+            </div>
+            <div class="card-back" style="position:absolute;inset:0;padding:24px;background:#fbf7ee;border-radius:8px;display:flex;flex-direction:column;justify-content:space-between;">
+              <div>
+                <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:#78716c;border-bottom:1px solid #e7e5e4;padding-bottom:6px;">Keepsake Whisper</div>
+                <p class="font-editorial" style="font-style:italic;font-size:14px;color:#292524;margin-top:12px;line-height:1.6;">
+                  "I still smile every single time I look back on this day."
+                </p>
+              </div>
+              <div style="font-size:11px;color:#a8a29e;text-align:right;">28 SEPT 2026 </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="polaroid-card" style="transform:rotate(-2deg);" onclick="flipCard(this)">
+          <div class="card-inner" style="position:relative;background:#fcfaf7;color:#1e293b;padding:16px 16px 24px 16px;border-radius:8px;box-shadow:0 18px 30px rgba(0,0,0,0.5);">
+            <div class="card-front">
+              <div style="width:100%;aspect-ratio:1/1;background:#1e1b4b;border-radius:4px;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;">
+                <div style="font-size:32px;color:#fef08a;">✦</div>
+              </div>
+              <div style="padding-top:12px;text-align:center;">
+                <h3 class="font-editorial" style="font-size:16px;color:#0f172a;font-weight:600;">Under The Aurora</h3>
+                <p style="font-size:11px;color:#64748b;margin-top:2px;">Midnight Starlight</p>
+              </div>
+            </div>
+            <div class="card-back" style="position:absolute;inset:0;padding:24px;background:#fbf7ee;border-radius:8px;display:flex;flex-direction:column;justify-content:space-between;">
+              <div>
+                <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:#78716c;border-bottom:1px solid #e7e5e4;padding-bottom:6px;">Keepsake Whisper</div>
+                <p class="font-editorial" style="font-style:italic;font-size:14px;color:#292524;margin-top:12px;line-height:1.6;">
+                  "I remember thinking that the stars had nothing on the spark in your eyes that night."
+                </p>
+              </div>
+              <div style="font-size:11px;color:#a8a29e;text-align:right;">Midnight Starlight</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="polaroid-card" style="transform:rotate(1.5deg);" onclick="flipCard(this)">
+          <div class="card-inner" style="position:relative;background:#fcfaf7;color:#1e293b;padding:16px 16px 24px 16px;border-radius:8px;box-shadow:0 18px 30px rgba(0,0,0,0.5);">
+            <div class="card-front">
+              <div style="width:100%;aspect-ratio:1/1;background:#1e1b4b;border-radius:4px;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;">
+                <div style="font-size:32px;color:#fef08a;">✦</div>
+              </div>
+              <div style="padding-top:12px;text-align:center;">
+                <h3 class="font-editorial" style="font-size:16px;color:#0f172a;font-weight:600;">Steaming Cups & Books</h3>
+                <p style="font-size:11px;color:#64748b;margin-top:2px;">Sunday Morning · 10:45 AM</p>
+              </div>
+            </div>
+            <div class="card-back" style="position:absolute;inset:0;padding:24px;background:#fbf7ee;border-radius:8px;display:flex;flex-direction:column;justify-content:space-between;">
+              <div>
+                <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:#78716c;border-bottom:1px solid #e7e5e4;padding-bottom:6px;">Keepsake Whisper</div>
+                <p class="font-editorial" style="font-style:italic;font-size:14px;color:#292524;margin-top:12px;line-height:1.6;">
+                  "You make everyday routines feel like the most sacred rituals."
+                </p>
+              </div>
+              <div style="font-size:11px;color:#a8a29e;text-align:right;">Sunday Morning · 10:45 AM</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="polaroid-card" style="transform:rotate(-1.8deg);" onclick="flipCard(this)">
+          <div class="card-inner" style="position:relative;background:#fcfaf7;color:#1e293b;padding:16px 16px 24px 16px;border-radius:8px;box-shadow:0 18px 30px rgba(0,0,0,0.5);">
+            <div class="card-front">
+              <div style="width:100%;aspect-ratio:1/1;background:#1e1b4b;border-radius:4px;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;">
+                <div style="font-size:32px;color:#fef08a;">✦</div>
+              </div>
+              <div style="padding-top:12px;text-align:center;">
+                <h3 class="font-editorial" style="font-size:16px;color:#0f172a;font-weight:600;">Golden Hour Horizon</h3>
+                <p style="font-size:11px;color:#64748b;margin-top:2px;">Summer Coastline</p>
+              </div>
+            </div>
+            <div class="card-back" style="position:absolute;inset:0;padding:24px;background:#fbf7ee;border-radius:8px;display:flex;flex-direction:column;justify-content:space-between;">
+              <div>
+                <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:#78716c;border-bottom:1px solid #e7e5e4;padding-bottom:6px;">Keepsake Whisper</div>
+                <p class="font-editorial" style="font-style:italic;font-size:14px;color:#292524;margin-top:12px;line-height:1.6;">
+                  "No photograph could ever do justice to how peaceful you looked standing right there."
+                </p>
+              </div>
+              <div style="font-size:11px;color:#a8a29e;text-align:right;">Summer Coastline</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="polaroid-card" style="transform:rotate(2.2deg);" onclick="flipCard(this)">
+          <div class="card-inner" style="position:relative;background:#fcfaf7;color:#1e293b;padding:16px 16px 24px 16px;border-radius:8px;box-shadow:0 18px 30px rgba(0,0,0,0.5);">
+            <div class="card-front">
+              <div style="width:100%;aspect-ratio:1/1;background:#1e1b4b;border-radius:4px;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;">
+                <div style="font-size:32px;color:#fef08a;">✦</div>
+              </div>
+              <div style="padding-top:12px;text-align:center;">
+                <h3 class="font-editorial" style="font-size:16px;color:#0f172a;font-weight:600;">Sparks In The Dark</h3>
+                <p style="font-size:11px;color:#64748b;margin-top:2px;">Celebration Dusk</p>
+              </div>
+            </div>
+            <div class="card-back" style="position:absolute;inset:0;padding:24px;background:#fbf7ee;border-radius:8px;display:flex;flex-direction:column;justify-content:space-between;">
+              <div>
+                <div style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:#78716c;border-bottom:1px solid #e7e5e4;padding-bottom:6px;">Keepsake Whisper</div>
+                <p class="font-editorial" style="font-style:italic;font-size:14px;color:#292524;margin-top:12px;line-height:1.6;">
+                  "May your new year be just as luminous as those sparks."
+                </p>
+              </div>
+              <div style="font-size:11px;color:#a8a29e;text-align:right;">Celebration Dusk</div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Reasons Section -->
+  <section id="reasons" style="padding:80px 0;border-top:1px solid rgba(255,255,255,0.06);">
+    <div class="container">
+      <div style="text-align:center;max-width:600px;margin:0 auto 50px auto;">
+        <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:#fde68a;font-weight:600;margin-bottom:8px;">
+          Chapter 02 · Unspoken Truths
+        </div>
+        <h2 class="font-editorial" style="font-size: clamp(28px, 4vw, 42px);font-weight:300;color:#ffffff;">
+          Six Reasons You Are One In Eight Billion
+        </h2>
+        <p style="font-size:14px;color:#94a3b8;margin-top:8px;">
+          The quiet habits, the subtle gestures, and the way you bring effortless calm to a noisy world.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        
+        <div class="glass-panel" style="padding:24px;border-radius:16px;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;" onclick="toggleReason(this)">
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+              <span style="font-size:20px;color:#fde68a;">✦</span>
+              <button onclick="event.stopPropagation();heartReason(this);" style="background:rgba(244,63,94,0.15);color:#fda4af;border:none;padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer;">
+                ♥ <span class="heart-count">42</span>
+              </button>
+            </div>
+            <h3 class="font-editorial" style="font-size:18px;color:#ffffff;margin-bottom:8px;">The Laughter That Resets The Room</h3>
+            <p style="font-size:13px;color:#cbd5e1;line-height:1.6;font-weight:300;">You have that rare, genuine laugh that immediately dissolves tension and invites everyone into warmth.</p>
+            <div class="secret-box" style="display:none;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.1);">
+              <div style="font-size:10px;text-transform:uppercase;color:#fde68a;font-weight:600;margin-bottom:4px;">Unspoken Secret</div>
+              <p class="font-editorial" style="font-style:italic;font-size:13px;color:#fef08a;line-height:1.5;">"Even on my heaviest days, hearing you laugh makes everything feel bearable again."</p>
+            </div>
+          </div>
+          <div style="padding-top:16px;font-size:11px;color:#64748b;display:flex;align-items:center;justify-content:space-between;">
+            <span class="whisper-hint">Tap to reveal whisper</span>
+            <span>↓</span>
+          </div>
+        </div>
+        
+        <div class="glass-panel" style="padding:24px;border-radius:16px;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;" onclick="toggleReason(this)">
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+              <span style="font-size:20px;color:#fde68a;">✦</span>
+              <button onclick="event.stopPropagation();heartReason(this);" style="background:rgba(244,63,94,0.15);color:#fda4af;border:none;padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer;">
+                ♥ <span class="heart-count">38</span>
+              </button>
+            </div>
+            <h3 class="font-editorial" style="font-size:18px;color:#ffffff;margin-bottom:8px;">The Way You Notice Little Things</h3>
+            <p style="font-size:13px;color:#cbd5e1;line-height:1.6;font-weight:300;">You remember the coffee someone likes, the song mentioned in passing, or the subtle pause before someone answers.</p>
+            <div class="secret-box" style="display:none;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.1);">
+              <div style="font-size:10px;text-transform:uppercase;color:#fde68a;font-weight:600;margin-bottom:4px;">Unspoken Secret</div>
+              <p class="font-editorial" style="font-style:italic;font-size:13px;color:#fef08a;line-height:1.5;">"It is your quiet attentiveness that makes anyone in your circle feel profoundly seen."</p>
+            </div>
+          </div>
+          <div style="padding-top:16px;font-size:11px;color:#64748b;display:flex;align-items:center;justify-content:space-between;">
+            <span class="whisper-hint">Tap to reveal whisper</span>
+            <span>↓</span>
+          </div>
+        </div>
+        
+        <div class="glass-panel" style="padding:24px;border-radius:16px;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;" onclick="toggleReason(this)">
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+              <span style="font-size:20px;color:#fde68a;">✦</span>
+              <button onclick="event.stopPropagation();heartReason(this);" style="background:rgba(244,63,94,0.15);color:#fda4af;border:none;padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer;">
+                ♥ <span class="heart-count">29</span>
+              </button>
+            </div>
+            <h3 class="font-editorial" style="font-size:18px;color:#ffffff;margin-bottom:8px;">Unwavering Quiet Resilience</h3>
+            <p style="font-size:13px;color:#cbd5e1;line-height:1.6;font-weight:300;">You face uncertainty not with shouting, but with steady grace, deep courage, and unwavering kindness.</p>
+            <div class="secret-box" style="display:none;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.1);">
+              <div style="font-size:10px;text-transform:uppercase;color:#fde68a;font-weight:600;margin-bottom:4px;">Unspoken Secret</div>
+              <p class="font-editorial" style="font-style:italic;font-size:13px;color:#fef08a;line-height:1.5;">"I admire your strength more than words ever manage to say."</p>
+            </div>
+          </div>
+          <div style="padding-top:16px;font-size:11px;color:#64748b;display:flex;align-items:center;justify-content:space-between;">
+            <span class="whisper-hint">Tap to reveal whisper</span>
+            <span>↓</span>
+          </div>
+        </div>
+        
+        <div class="glass-panel" style="padding:24px;border-radius:16px;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;" onclick="toggleReason(this)">
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+              <span style="font-size:20px;color:#fde68a;">✦</span>
+              <button onclick="event.stopPropagation();heartReason(this);" style="background:rgba(244,63,94,0.15);color:#fda4af;border:none;padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer;">
+                ♥ <span class="heart-count">56</span>
+              </button>
+            </div>
+            <h3 class="font-editorial" style="font-size:18px;color:#ffffff;margin-bottom:8px;">Effortless Comfort & Safety</h3>
+            <p style="font-size:13px;color:#cbd5e1;line-height:1.6;font-weight:300;">Being around you feels like taking a deep breath after holding it for hours. Pure, judgment-free calm.</p>
+            <div class="secret-box" style="display:none;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.1);">
+              <div style="font-size:10px;text-transform:uppercase;color:#fde68a;font-weight:600;margin-bottom:4px;">Unspoken Secret</div>
+              <p class="font-editorial" style="font-style:italic;font-size:13px;color:#fef08a;line-height:1.5;">"You are the only person with whom silence is just as comfortable as deep conversation."</p>
+            </div>
+          </div>
+          <div style="padding-top:16px;font-size:11px;color:#64748b;display:flex;align-items:center;justify-content:space-between;">
+            <span class="whisper-hint">Tap to reveal whisper</span>
+            <span>↓</span>
+          </div>
+        </div>
+        
+        <div class="glass-panel" style="padding:24px;border-radius:16px;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;" onclick="toggleReason(this)">
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+              <span style="font-size:20px;color:#fde68a;">✦</span>
+              <button onclick="event.stopPropagation();heartReason(this);" style="background:rgba(244,63,94,0.15);color:#fda4af;border:none;padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer;">
+                ♥ <span class="heart-count">31</span>
+              </button>
+            </div>
+            <h3 class="font-editorial" style="font-size:18px;color:#ffffff;margin-bottom:8px;">Your Sparkling Curiosity</h3>
+            <p style="font-size:13px;color:#cbd5e1;line-height:1.6;font-weight:300;">The way your eyes light up when you discover a new idea, a captivating story, or a hidden corner of the world.</p>
+            <div class="secret-box" style="display:none;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.1);">
+              <div style="font-size:10px;text-transform:uppercase;color:#fde68a;font-weight:600;margin-bottom:4px;">Unspoken Secret</div>
+              <p class="font-editorial" style="font-style:italic;font-size:13px;color:#fef08a;line-height:1.5;">"Never lose that gentle wonder—it is what makes you completely magnetic."</p>
+            </div>
+          </div>
+          <div style="padding-top:16px;font-size:11px;color:#64748b;display:flex;align-items:center;justify-content:space-between;">
+            <span class="whisper-hint">Tap to reveal whisper</span>
+            <span>↓</span>
+          </div>
+        </div>
+        
+        <div class="glass-panel" style="padding:24px;border-radius:16px;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;" onclick="toggleReason(this)">
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+              <span style="font-size:20px;color:#fde68a;">✦</span>
+              <button onclick="event.stopPropagation();heartReason(this);" style="background:rgba(244,63,94,0.15);color:#fda4af;border:none;padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer;">
+                ♥ <span class="heart-count">88</span>
+              </button>
+            </div>
+            <h3 class="font-editorial" style="font-size:18px;color:#ffffff;margin-bottom:8px;">Simply Being You</h3>
+            <p style="font-size:13px;color:#cbd5e1;line-height:1.6;font-weight:300;">No performance, no pretense. Just your authentic, irreplaceable, golden self in a world full of imitations.</p>
+            <div class="secret-box" style="display:none;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.1);">
+              <div style="font-size:10px;text-transform:uppercase;color:#fde68a;font-weight:600;margin-bottom:4px;">Unspoken Secret</div>
+              <p class="font-editorial" style="font-style:italic;font-size:13px;color:#fef08a;line-height:1.5;">"Of all the billions of souls on this earth, you are the one I am most thankful to know."</p>
+            </div>
+          </div>
+          <div style="padding-top:16px;font-size:11px;color:#64748b;display:flex;align-items:center;justify-content:space-between;">
+            <span class="whisper-hint">Tap to reveal whisper</span>
+            <span>↓</span>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Cake Ritual Section -->
+  <section id="ritual" style="padding:90px 0;border-top:1px solid rgba(255,255,255,0.06);text-align:center;">
+    <div class="container" style="max-width:800px;">
+      <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:#fde68a;font-weight:600;margin-bottom:8px;">
+        Chapter 03 · The Golden Ritual
+      </div>
+      <h2 class="font-editorial" style="font-size: clamp(32px, 5vw, 48px);font-weight:300;color:#ffffff;">
+        Make A Wish, Arshdeep Kaur
+      </h2>
+      <p style="font-size:14px;color:#94a3b8;margin-top:8px;max-width:500px;margin-left:auto;margin-right:auto;">
+        Close your eyes, think of the one secret thing your heart desires most this year, and blow out the flames.
+      </p>
+
+      <!-- Cake Graphic -->
+      <div style="margin:50px auto 30px auto;max-width:380px;display:flex;flex-direction:column;align-items:center;">
+        <!-- Candles -->
+        <div style="display:flex;gap:24px;align-items:flex-end;margin-bottom:-4px;z-index:2;">
+          
+          <div class="candle-item" onclick="blowCandle(0)" style="display:flex;flex-direction:column;align-items:center;cursor:pointer;" title="Tap to blow out candle">
+            <div id="flame-0" class="animate-flame" style="width:14px;height:24px;border-radius:50%;background:radial-gradient(ellipse at 50% 80%, #fef08a 0%, #f59e0b 60%, #ef4444 100%);box-shadow:0 0 14px #f59e0b;"></div>
+            <div id="smoke-0" class="animate-smoke" style="display:none;width:8px;height:24px;border-radius:50%;background:rgba(200,200,200,0.5);filter:blur(2px);"></div>
+            <div style="width:2px;height:8px;background:#44403c;"></div>
+            <div style="width:14px;height:55px;border-radius:3px 3px 0 0;background:linear-gradient(to right, #fef08a, #fffbeb, #fef08a);box-shadow:0 4px 6px rgba(0,0,0,0.3);"></div>
+          </div>
+          
+          <div class="candle-item" onclick="blowCandle(1)" style="display:flex;flex-direction:column;align-items:center;cursor:pointer;" title="Tap to blow out candle">
+            <div id="flame-1" class="animate-flame" style="width:14px;height:24px;border-radius:50%;background:radial-gradient(ellipse at 50% 80%, #fef08a 0%, #f59e0b 60%, #ef4444 100%);box-shadow:0 0 14px #f59e0b;"></div>
+            <div id="smoke-1" class="animate-smoke" style="display:none;width:8px;height:24px;border-radius:50%;background:rgba(200,200,200,0.5);filter:blur(2px);"></div>
+            <div style="width:2px;height:8px;background:#44403c;"></div>
+            <div style="width:14px;height:55px;border-radius:3px 3px 0 0;background:linear-gradient(to right, #fef08a, #fffbeb, #fef08a);box-shadow:0 4px 6px rgba(0,0,0,0.3);"></div>
+          </div>
+          
+          <div class="candle-item" onclick="blowCandle(2)" style="display:flex;flex-direction:column;align-items:center;cursor:pointer;" title="Tap to blow out candle">
+            <div id="flame-2" class="animate-flame" style="width:14px;height:24px;border-radius:50%;background:radial-gradient(ellipse at 50% 80%, #fef08a 0%, #f59e0b 60%, #ef4444 100%);box-shadow:0 0 14px #f59e0b;"></div>
+            <div id="smoke-2" class="animate-smoke" style="display:none;width:8px;height:24px;border-radius:50%;background:rgba(200,200,200,0.5);filter:blur(2px);"></div>
+            <div style="width:2px;height:8px;background:#44403c;"></div>
+            <div style="width:14px;height:55px;border-radius:3px 3px 0 0;background:linear-gradient(to right, #fef08a, #fffbeb, #fef08a);box-shadow:0 4px 6px rgba(0,0,0,0.3);"></div>
+          </div>
+          
+          <div class="candle-item" onclick="blowCandle(3)" style="display:flex;flex-direction:column;align-items:center;cursor:pointer;" title="Tap to blow out candle">
+            <div id="flame-3" class="animate-flame" style="width:14px;height:24px;border-radius:50%;background:radial-gradient(ellipse at 50% 80%, #fef08a 0%, #f59e0b 60%, #ef4444 100%);box-shadow:0 0 14px #f59e0b;"></div>
+            <div id="smoke-3" class="animate-smoke" style="display:none;width:8px;height:24px;border-radius:50%;background:rgba(200,200,200,0.5);filter:blur(2px);"></div>
+            <div style="width:2px;height:8px;background:#44403c;"></div>
+            <div style="width:14px;height:55px;border-radius:3px 3px 0 0;background:linear-gradient(to right, #fef08a, #fffbeb, #fef08a);box-shadow:0 4px 6px rgba(0,0,0,0.3);"></div>
+          </div>
+          
+          <div class="candle-item" onclick="blowCandle(4)" style="display:flex;flex-direction:column;align-items:center;cursor:pointer;" title="Tap to blow out candle">
+            <div id="flame-4" class="animate-flame" style="width:14px;height:24px;border-radius:50%;background:radial-gradient(ellipse at 50% 80%, #fef08a 0%, #f59e0b 60%, #ef4444 100%);box-shadow:0 0 14px #f59e0b;"></div>
+            <div id="smoke-4" class="animate-smoke" style="display:none;width:8px;height:24px;border-radius:50%;background:rgba(200,200,200,0.5);filter:blur(2px);"></div>
+            <div style="width:2px;height:8px;background:#44403c;"></div>
+            <div style="width:14px;height:55px;border-radius:3px 3px 0 0;background:linear-gradient(to right, #fef08a, #fffbeb, #fef08a);box-shadow:0 4px 6px rgba(0,0,0,0.3);"></div>
+          </div>
+          
+        </div>
+        <!-- Cake Tier 1 -->
+        <div style="width:220px;height:60px;background:linear-gradient(to bottom, #2d2438, #1c1726);border-radius:16px 16px 0 0;border-top:3px solid rgba(253,230,138,0.4);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 20px rgba(0,0,0,0.4);">
+          <span class="font-editorial" style="font-size:11px;letter-spacing:0.1em;color:rgba(253,230,138,0.8);text-transform:uppercase;">✦ Pure Starlight ✦</span>
+        </div>
+        <!-- Cake Tier 2 -->
+        <div style="width:310px;height:85px;background:linear-gradient(to bottom, #1f1a2e, #13101c);border-radius:18px 18px 0 0;border-top:3px solid rgba(253,230,138,0.3);display:flex;align-items:center;justify-content:center;box-shadow:0 15px 30px rgba(0,0,0,0.6);">
+          <span class="font-editorial" style="font-size:14px;color:rgba(253,230,138,0.7);font-style:italic;">May All Your Wishes Blossom</span>
+        </div>
+        <!-- Cake Plate -->
+        <div style="width:360px;height:12px;background:#334155;border-radius:50px;box-shadow:0 8px 15px rgba(0,0,0,0.5);"></div>
+      </div>
+
+      <div style="margin-top:20px;">
+        <button id="blowAllBtn" onclick="blowAllCandles()" class="btn-gold">
+          💨 Blow Out All Candles
+        </button>
+
+        <div id="wishRevealedBox" class="glass-panel-warm" style="display:none;max-width:540px;margin:30px auto 0 auto;padding:24px;border-radius:16px;border:1px solid rgba(251,191,36,0.3);">
+          <div style="font-size:16px;color:#fde68a;font-weight:600;margin-bottom:8px;">★ Your Wish Has Been Released To The Stars ★</div>
+          <p class="font-editorial" style="font-size:16px;font-style:italic;color:#ffffff;line-height:1.6;">
+            "May your upcoming year be overflowing with laughter that makes your stomach hurt, unexpected adventures, and the endless peace you so effortlessly bring into my life."
+          </p>
+          <div style="font-size:12px;color:#fde68a;margin-top:10px;">— Always Yours, Sukhraj</div>
+          <div style="margin-top:16px;">
+            <button onclick="relightCandles()" class="btn-ghost" style="padding:6px 14px;font-size:12px;">Relight Candles</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Letter Section -->
+  <section id="letter" style="padding:90px 0;border-top:1px solid rgba(255,255,255,0.06);text-align:center;">
+    <div class="container" style="max-width:720px;">
+      <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:#fde68a;font-weight:600;margin-bottom:8px;">
+        Chapter 04 · The Wax Seal
+      </div>
+      <h2 class="font-editorial" style="font-size: clamp(32px, 5vw, 48px);font-weight:300;color:#ffffff;">
+        A Sealed Letter Just For You
+      </h2>
+      <p style="font-size:14px;color:#94a3b8;margin-top:8px;">
+        Tap the golden wax seal below to break it open and read your personal letter.
+      </p>
+
+      <!-- Envelope & Letter Container -->
+      <div style="margin-top:40px;">
+        <div id="sealedEnvelope" class="glass-panel" onclick="openLetter()" style="padding:60px 30px;border-radius:20px;cursor:pointer;border:1px solid rgba(251,191,36,0.3);box-shadow:0 20px 40px rgba(0,0,0,0.6);transition:transform 0.3s ease;">
+          <div style="width:72px;height:72px;margin:0 auto 20px auto;border-radius:50%;background:linear-gradient(135deg, #f59e0b, #d97706, #b45309);box-shadow:0 0 25px rgba(245,158,11,0.6);display:flex;align-items:center;justify-content:center;border:2px solid #fef08a;">
+            <span class="font-editorial" style="font-size:26px;color:#fef3c7;font-weight:bold;font-style:italic;">A</span>
+          </div>
+          <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:#fde68a;font-weight:600;">Personal & Confidential</div>
+          <h3 class="font-editorial" style="font-size:24px;color:#ffffff;margin-top:4px;">To: Arshdeep Kaur</h3>
+          <p style="font-size:12px;color:#94a3b8;margin-top:6px;">Tap seal to open letter</p>
+        </div>
+
+        <!-- Open Letter Content -->
+        <div id="unrolledLetter" style="display:none;background:#fcfaf4;color:#1c1917;padding:40px 32px;border-radius:18px;box-shadow:0 25px 50px rgba(0,0,0,0.7);text-align:left;border:1px solid #fde68a;">
+          <div style="border-bottom:1px solid #e7e5e4;padding-bottom:16px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:flex-end;">
+            <div>
+              <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#78716c;">Dated: 30 Oct · Today</div>
+              <h3 class="font-editorial" style="font-size:28px;color:#0c0a09;margin-top:4px;">Dearest Arshdeep Kaur,</h3>
+            </div>
+            <div style="font-size:20px;color:#d97706;">★</div>
+          </div>
+
+          <div class="font-editorial" style="font-size:17px;line-height:1.8;color:#292524;font-weight:300;white-space:pre-line;">
+I wanted to take a quiet moment away from all the noise to write you something that won't fade.
+
+There are people who walk into your life and simply make everything warmer. You notice things nobody else sees. You bring ease to anxious moments without even trying, and your presence alone turns an ordinary day into a cherished memory.
+
+Whenever life gets complicated or hurried, I think about how steady and bright your spirit is. You inspire me to be kinder, to listen deeper, and to find wonder in the small things.
+
+My wish for you this year is quiet confidence, effortless joy, and knowing that whatever journey lies ahead, you have someone in your corner who believes in you relentlessly.
+          </div>
+
+          <div style="margin-top:32px;padding-top:20px;border-top:1px solid #e7e5e4;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:#78716c;">With all my love,</div>
+              <div class="font-editorial" style="font-size:22px;color:#0c0a09;font-style:italic;">Always Yours, Sukhraj</div>
+            </div>
+            <button onclick="alert('Cherished forever in heart! ♥')" style="background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;">
+              ♥ Keep In My Heart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="padding:40px 0;text-align:center;border-top:1px solid rgba(255,255,255,0.06);font-size:12px;color:#64748b;">
+    <div class="container">
+      <p class="font-editorial" style="font-size:16px;color:#cbd5e1;font-style:italic;margin-bottom:6px;">
+        "May the stars always guide you home to laughter and warmth."
+      </p>
+      <p>A Self-Contained 2026 Interactive Birthday Greeting · Dedicated with Heart</p>
+    </div>
+  </footer>
+
+  <!-- Embedded Web Audio & Interaction Script -->
+  <script>
+    // State
+    const greetingData = {
+      recipient: "Arshdeep Kaur",
+      candlesLit: [true, true, true, true, true]
+    };
+
+    // Web Audio Synthesizer
+    let audioCtx = null;
+    let isPlaying = false;
+    let musicInterval = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    const chords = [
+      [293.66, 369.99, 440.0],
+      [246.94, 293.66, 369.99],
+      [220.0, 293.66, 440.0],
+      [196.0, 246.94, 293.66]
+    ];
+    let chordIdx = 0;
+    let step = 0;
+
+    function toggleMusic() {
+      initAudio();
+      const btn = document.getElementById('musicStatusText');
+      if (isPlaying) {
+        isPlaying = false;
+        clearInterval(musicInterval);
+        btn.textContent = '♫ Play Melody';
+      } else {
+        isPlaying = true;
+        btn.textContent = '♫ Melody Playing';
+        musicInterval = setInterval(() => {
+          if (!isPlaying || !audioCtx) return;
+          const chord = chords[chordIdx];
+          const freq = chord[step % chord.length] * (step % 2 === 0 ? 1 : 1.5);
+          playNote(freq, 0.1, 1.8);
+          step++;
+          if (step >= 8) {
+            step = 0;
+            chordIdx = (chordIdx + 1) % chords.length;
+          }
+        }, 650);
+      }
+    }
+    document.getElementById('musicToggleBtn').addEventListener('click', toggleMusic);
+
+    function playNote(freq, vol, decay) {
+      if (!audioCtx) return;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + decay);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + decay);
+    }
+
+    function playChime() {
+      initAudio();
+      [880, 1108.73, 1318.51].forEach((f, i) => {
+        setTimeout(() => playNote(f, 0.12, 1.2), i * 70);
+      });
+    }
+
+    // Candle blow
+    function blowCandle(idx) {
+      initAudio();
+      playChime();
+      greetingData.candlesLit[idx] = false;
+      document.getElementById('flame-' + idx).style.display = 'none';
+      const smoke = document.getElementById('smoke-' + idx);
+      smoke.style.display = 'block';
+      setTimeout(() => { smoke.style.display = 'none'; }, 1500);
+
+      const allOut = greetingData.candlesLit.every(lit => !lit);
+      if (allOut) {
+        handleWishCelebration();
+      }
+    }
+
+    function blowAllCandles() {
+      initAudio();
+      for (let i = 0; i < 5; i++) {
+        greetingData.candlesLit[i] = false;
+        document.getElementById('flame-' + i).style.display = 'none';
+        const smoke = document.getElementById('smoke-' + i);
+        smoke.style.display = 'block';
+      }
+      handleWishCelebration();
+    }
+
+    function relightCandles() {
+      playChime();
+      for (let i = 0; i < 5; i++) {
+        greetingData.candlesLit[i] = true;
+        document.getElementById('flame-' + i).style.display = 'block';
+        document.getElementById('smoke-' + i).style.display = 'none';
+      }
+      document.getElementById('wishRevealedBox').style.display = 'none';
+      document.getElementById('blowAllBtn').style.display = 'inline-flex';
+    }
+
+    function handleWishCelebration() {
+      document.getElementById('blowAllBtn').style.display = 'none';
+      document.getElementById('wishRevealedBox').style.display = 'block';
+      if (window.confetti) {
+        confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+        setTimeout(() => {
+          confetti({ particleCount: 100, spread: 100, origin: { y: 0.7 } });
+        }, 300);
+      }
+    }
+
+    // Flip polaroid
+    function flipCard(cardEl) {
+      playChime();
+      cardEl.classList.toggle('card-flipped');
+    }
+
+    // Toggle reasons
+    function toggleReason(cardEl) {
+      playChime();
+      const secret = cardEl.querySelector('.secret-box');
+      const hint = cardEl.querySelector('.whisper-hint');
+      if (secret.style.display === 'none' || !secret.style.display) {
+        secret.style.display = 'block';
+        hint.textContent = 'Hide whisper';
+      } else {
+        secret.style.display = 'none';
+        hint.textContent = 'Tap to reveal whisper';
+      }
+    }
+
+    function heartReason(btn) {
+      initAudio();
+      playNote(650, 0.15, 0.25);
+      const span = btn.querySelector('.heart-count');
+      span.textContent = parseInt(span.textContent || '0') + 1;
+    }
+
+    // Open Letter
+    function openLetter() {
+      playChime();
+      document.getElementById('sealedEnvelope').style.display = 'none';
+      document.getElementById('unrolledLetter').style.display = 'block';
+      if (window.confetti) {
+        confetti({ particleCount: 80, spread: 60, origin: { y: 0.7 } });
+      }
+    }
+
+    // Interactive Starfield Canvas
+    (function() {
+      const canvas = document.getElementById('starfield');
+      const ctx = canvas.getContext('2d');
+      let w = canvas.width = window.innerWidth;
+      let h = canvas.height = window.innerHeight;
+      window.addEventListener('resize', () => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      });
+
+      const stars = [];
+      for (let i = 0; i < 120; i++) {
+        stars.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 1.5 + 0.5,
+          alpha: Math.random() * 0.7 + 0.3,
+          speed: Math.random() * 0.02 + 0.005
+        });
+      }
+
+      let mouse = { x: -1000, y: -1000 };
+      window.addEventListener('mousemove', e => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      });
+
+      let tick = 0;
+      function loop() {
+        tick++;
+        ctx.clearRect(0, 0, w, h);
+        for (let i = 0; i < stars.length; i++) {
+          const s = stars[i];
+          const a = s.alpha + Math.sin(tick * s.speed) * 0.25;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fillStyle = '#ffffff';
+          ctx.globalAlpha = Math.max(0.1, Math.min(1, a));
+          ctx.fill();
+
+          // Connect stars near mouse
+          const dx = s.x - mouse.x;
+          const dy = s.y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 140) {
+            ctx.beginPath();
+            ctx.moveTo(mouse.x, mouse.y);
+            ctx.lineTo(s.x, s.y);
+            ctx.strokeStyle = '#fde68a';
+            ctx.globalAlpha = (1 - dist / 140) * 0.35;
+            ctx.stroke();
+          }
+        }
+        requestAnimationFrame(loop);
+      }
+      loop();
+    })();
+  </script>
+</body>
+</html>
